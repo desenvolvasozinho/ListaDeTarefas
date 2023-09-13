@@ -63,6 +63,36 @@ class _TelaTarefaState extends State<TelaTarefa> {
     });
   }
 
+  void _editarTarefa(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Editar Tarefa'),
+          content: TextField(
+            controller: TextEditingController(text: _tarefas[index]),
+            decoration: const InputDecoration(labelText: 'Tarefa'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Salvar'),
+              onPressed: () {
+                _salvarTarefas();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +104,18 @@ class _TelaTarefaState extends State<TelaTarefa> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(_tarefas[index]),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () => _removerTarefa(index),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () => _editarTarefa(index),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () => _removerTarefa(index),
+                ),
+              ],
             ),
           );
         },
