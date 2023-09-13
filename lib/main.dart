@@ -70,9 +70,13 @@ class _TelaTarefaState extends State<TelaTarefa> {
         return AlertDialog(
           title: const Text('Editar Tarefa'),
           content: TextField(
-            controller: TextEditingController(text: _tarefas[index]),
-            decoration: const InputDecoration(labelText: 'Tarefa'),
-          ),
+              controller: TextEditingController(text: _tarefas[index]),
+              decoration: const InputDecoration(labelText: 'Tarefa'),
+              onChanged: (value) {
+                setState(() {
+                  _tarefas[index] = value;
+                });
+              }),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancelar'),
