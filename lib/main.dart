@@ -30,36 +30,38 @@ class _TelaTarefaState extends State<TelaTarefa> {
   @override
   void initState() {
     super.initState();
-    _carregarTarefas();
+    _carregarTarefas(); // Carregar tarefas salvas ao iniciar o aplicativo
   }
 
   void _carregarTarefas() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _tarefas = prefs.getStringList('tarefas') ?? [];
+      _tarefas = prefs.getStringList('tarefas') ??
+          []; // Carregar tarefas salvas no SharedPreferences
     });
   }
 
   void _salvarTarefas() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('tarefas', _tarefas);
+    prefs.setStringList(
+        'tarefas', _tarefas); // Salvar tarefas no SharedPreferences
   }
 
   void _adicionarTarefa() {
     setState(() {
       final novaTarefa = _tarefaController.text;
       if (novaTarefa.isNotEmpty) {
-        _tarefas.add(novaTarefa);
+        _tarefas.add(novaTarefa); // Adicionar uma nova tarefa à lista
         _tarefaController.clear();
-        _salvarTarefas();
+        _salvarTarefas(); // Salvar as tarefas atualizadas
       }
     });
   }
 
   void _removerTarefa(int index) {
     setState(() {
-      _tarefas.removeAt(index);
-      _salvarTarefas();
+      _tarefas.removeAt(index); // Remover tarefa da lista
+      _salvarTarefas(); // Salvar as tarefas atualizadas
     });
   }
 
@@ -74,7 +76,8 @@ class _TelaTarefaState extends State<TelaTarefa> {
               decoration: const InputDecoration(labelText: 'Tarefa'),
               onChanged: (value) {
                 setState(() {
-                  _tarefas[index] = value;
+                  _tarefas[index] =
+                      value; // Atualizar a tarefa editada na lista
                 });
               }),
           actions: <Widget>[
@@ -87,7 +90,7 @@ class _TelaTarefaState extends State<TelaTarefa> {
             TextButton(
               child: const Text('Salvar'),
               onPressed: () {
-                _salvarTarefas();
+                _salvarTarefas(); // Salvar as tarefas atualizadas após a edição
                 Navigator.of(context).pop();
               },
             ),
@@ -145,7 +148,7 @@ class _TelaTarefaState extends State<TelaTarefa> {
                   TextButton(
                     child: const Text('Adicionar'),
                     onPressed: () {
-                      _adicionarTarefa();
+                      _adicionarTarefa(); // Adicionar tarefa quando o botão "Adicionar" é pressionado
                       Navigator.of(context).pop();
                     },
                   ),
