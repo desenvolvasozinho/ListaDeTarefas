@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   runApp(const TarefaApp());
 }
+//teste
 
 class TarefaApp extends StatelessWidget {
   const TarefaApp({super.key});
